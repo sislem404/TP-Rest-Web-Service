@@ -22,7 +22,15 @@ public class LocationWebService {
 
 	@GetMapping("/cars")
 	public List<Car> listOfCars() {
-    return cars;
+		List<Car> availableCars = new ArrayList<>();
+
+    for (Car car : cars) {
+        if (!car.isRented()) {
+            availableCars.add(car);
+        }
+    }
+
+    return availableCars;
 	}
 
 	@GetMapping("/cars/{plateNumber}")
