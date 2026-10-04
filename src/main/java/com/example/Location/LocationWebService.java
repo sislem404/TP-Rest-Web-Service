@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -23,6 +24,18 @@ public class LocationWebService {
 	public List<Car> listOfCars() {
     return cars;
 	}
+
+	@GetMapping("/cars/{plateNumber}")
+	public Car aCar(@PathVariable("plateNumber") String plateNumber) {
+		 for (Car car : cars) {
+        	if (car.getPlateNumber().equals(plateNumber)) {
+            return car;
+        	}
+    }
+
+    return null;
+	}
+
 	@GetMapping("/")
 	public String hello() {
 		return "hello";
